@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ECharts</title>
+</head>
+<body>
+<div id="main" style="height: 100%; width: 100%"></div>
+<script type="text/javascript" src="../echarts.min.js"></script>
+<script type="text/javascript">
+    let myChart;
+
+    let options = {
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            type: 'line',
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        }]
+    };
+
+    function createChart() {
+        let dom = document.getElementById("main");
+        dom.style.height = window.innerHeight - 16 + 'px'
+        myChart = echarts.init(dom);
+        myChart.setOption(options);
+    }
+
+    function setData(dataOption) {
+        myChart.setOption(dataOption)
+    }
+</script>
+</body>
+</html>
