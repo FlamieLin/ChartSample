@@ -12,5 +12,9 @@
             android:id="@+id/hichartsFragment"
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/hicharts" />
+        <item
+            android:id="@+id/HIChartWebFragment"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/hichartsWeb" />
     </group>
 </menu>

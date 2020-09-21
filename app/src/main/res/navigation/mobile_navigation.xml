@@ -9,12 +9,18 @@
         android:id="@+id/EChartFragment"
         android:name="com.tdec.chartsample.ui.eChart.EChartFragment"
         android:label="EChart"
-        tools:layout="@layout/e_chart_fragment"/>
+        tools:layout="@layout/e_chart_fragment" />
 
     <fragment
         android:id="@+id/hichartsFragment"
         android:name="com.tdec.chartsample.ui.hiChart.HichartsFragment"
         android:label="Hicharts"
         tools:layout="@layout/hicharts_fragment" />
+
+    <fragment
+        android:id="@+id/HIChartWebFragment"
+        android:name="com.tdec.chartsample.ui.hiChartWeb.HIChartWebFragment"
+        android:label="HichartsWeb"
+        tools:layout="@layout/h_i_chart_web_fragment" />
 
 </navigation>

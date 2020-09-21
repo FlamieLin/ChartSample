@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HighCharts</title>
+</head>
+<body>
+<div id="container" style="height: 100%; width: 100%"></div>
+<script type="text/javascript" src="../code/highcharts.src.js"></script>
+<script type="text/javascript">
+    let myChart;
+
+    let options = {
+        boost: {
+            useGPUTranslations: true
+        },
+        chart: {
+            //指定图表的类型，默认是折线图（line）
+            type: "line",
+            pinchType: "xy",
+            panning: true,
+            animation: false
+        },
+        tooltip: {
+            followTouchMove: false
+        },
+        title: {
+            // 标题
+            text: '测试图表'
+        },
+        xAxis: {
+            tickInterval: 1,
+            // x 轴分类
+            categories: ['苹果', '香蕉', '橙子', '西瓜', '菠萝', '葡萄', '芒果']
+        },
+        yAxis: {
+            title: {
+                // y 轴标题
+                text: '吃水果个数'
+            }
+        },
+        series: [{                              // 数据列
+            name: '小明',                        // 数据列名
+            data: [1, 0, 4, 2, 3, 9, 1]                     // 数据
+        }, {
+            name: '小红',
+            data: [5, 7, 3, 2, 2, 4, 12]
+        }],
+        credits: {
+            // 禁用版权信息
+            enabled: false
+        }
+    }
+
+    function createChart() {
+        let dom = document.getElementById("container");
+        dom.style.height = window.innerHeight - 16 + 'px'
+        myChart = Highcharts.chart('container', options);
+    }
+
+    function setData(json) {
+        myChart.xAxis[0].setCategories(json.xAxis.data, true)
+        myChart.series[0].update({
+            data: json.series[0].data
+        });
+        myChart.series[1].update({
+            data: json.series[1].data
+        });
+    }
+</script>
+</body>
+</html>

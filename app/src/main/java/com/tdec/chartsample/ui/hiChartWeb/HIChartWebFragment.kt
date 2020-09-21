@@ -1,66 +1,57 @@
-package com.tdec.chartsample.ui.eChart
+package com.tdec.chartsample.ui.hiChartWeb
 
 import android.annotation.SuppressLint
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.tdec.chartsample.databinding.EChartFragmentBinding
+import com.tdec.chartsample.R
+import com.tdec.chartsample.databinding.HIChartWebFragmentBinding
 
-class EChartFragment : Fragment() {
+class HIChartWebFragment : Fragment() {
 
-    private val viewModel: EChartViewModel by viewModels()
-
-    private lateinit var binding: EChartFragmentBinding
+    private val viewModel: HIChartWebViewModel by viewModels()
+    private lateinit var binding: HIChartWebFragmentBinding
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return EChartFragmentBinding.inflate(inflater, container, false).also { binding ->
-            this.binding = binding
+        return HIChartWebFragmentBinding.inflate(inflater, container, false).also { binding ->
             binding.viewModel = viewModel
             binding.lifecycleOwner = viewLifecycleOwner
-            binding.echart.also { chart ->
+            binding.hiChart.also { chart ->
                 chart.settings.javaScriptEnabled = true
                 chart.loadUrl(viewModel.chartUrl)
                 chart.webViewClient = object : WebViewClient() {
                     override fun onPageFinished(view: WebView?, url: String?) {
                         super.onPageFinished(view, url)
                         viewModel.createChart()
-                        viewModel.isInitFinish = true
+                        viewModel.startSetChartData()
                     }
                 }
             }
+            this.binding = binding
         }.root
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.startSetChartData()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        // TODO: Use the ViewModel
 
         viewModel.chartJavascript.observe(viewLifecycleOwner, Observer {
             if (!it.isNullOrEmpty()) {
-                binding.echart.evaluateJavascript(it) { result ->
-                    viewModel.valueCallBack(binding.echart.id, result)
+                binding.hiChart.evaluateJavascript(it) { result ->
+                    viewModel.valueCallBack(binding.hiChart.id, result)
                 }
             }
         })
     }
 
-    override fun onPause() {
-        super.onPause()
-        viewModel.stopSetChartData()
-    }
 }

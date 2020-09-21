@@ -13,5 +13,6 @@
 
     <string name="echarts">ECharts</string>
     <string name="hicharts">Hicharts</string>
+    <string name="hichartsWeb">HichartsWeb</string>
 
 </resources>
